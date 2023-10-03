@@ -1,9 +1,6 @@
 package org.bootcamp.dominio;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Dev {
 
@@ -29,16 +26,23 @@ public class Dev {
 
     }
     public void inscreverBootcamp(Bootcamp bootcamp){
-
+        this.conteudosInscritos.addAll(bootcamp.getConteudos());
+        bootcamp.getDevsInscritos().add(this);
     }
 
     public void progredir(){
-
+        Optional<Conteudo > conteudoEmProgressao = this.conteudosInscritos.stream().findFirst();
+        if(conteudoEmProgressao.isPresent()){
+            this.conteudosConcluidos.add(conteudoEmProgressao.get());
+            this.conteudosInscritos.remove(conteudoEmProgressao.get());
+        }else{
+            System.err.println("Voce não está matriculado em nenhum conteudo!!!");
+        }
 
     }
     public double calcularXp(){
-        return 2d;
-
+        return this.conteudosConcluidos.stream().mapToDouble(Conteudo::calcularXp)
+                .sum();
     }
     public String getNome() {
         return nome;

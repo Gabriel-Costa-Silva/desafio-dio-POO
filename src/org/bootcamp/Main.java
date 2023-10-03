@@ -1,8 +1,6 @@
 package org.bootcamp;
 
-import org.bootcamp.dominio.Conteudo;
-import org.bootcamp.dominio.Curso;
-import org.bootcamp.dominio.Mentoria;
+import org.bootcamp.dominio.*;
 
 import java.time.LocalDate;
 
@@ -34,6 +32,32 @@ public class Main {
         System.out.println(mentoria1);
 
 
+        Bootcamp bootcamp = new Bootcamp();
+        bootcamp.setNome("new bootcamp");
+        bootcamp.setDescricao("bootcamp novo");
+        bootcamp.getConteudos().add(curso1);
+        bootcamp.getConteudos().add(curso2);
+        bootcamp.getConteudos().add(mentoria1);
+
+
+        Dev newDev = new Dev();
+
+        newDev.setNome("GABRIEL");
+        newDev.setRA("123123123");
+        newDev.setConteudosInscritos(bootcamp.getConteudos());
+        newDev.progredir();
+        System.out.println("Conteudos inscritos : "+ newDev.getConteudosInscritos() );
+
+
+        Dev oldDev = new Dev();
+
+        oldDev.setNome("SUZANA");
+        oldDev.setRA("123123123");
+        oldDev.setConteudosInscritos(bootcamp.getConteudos());
+
+        oldDev.progredir();
+        oldDev.progredir();
+        System.out.println("Conteudos inscritos : "+ oldDev.getConteudosInscritos() );
 
         System.out.println("Hello world!");
     }
